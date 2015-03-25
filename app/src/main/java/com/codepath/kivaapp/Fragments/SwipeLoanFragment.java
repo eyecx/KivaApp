@@ -5,17 +5,23 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.kivaapp.Clients.KivaClient;
 import com.codepath.kivaapp.Models.Loan;
 import com.codepath.kivaapp.R;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by edmund_ye on 3/18/15.
@@ -23,7 +29,7 @@ import java.util.ArrayList;
 public class SwipeLoanFragment extends Fragment {
     private ImageView ivLoan;
     private TextView tvName;
-    private TextView tvUse;
+    private TextView tvDescription;
     private ImageView ivThumbsUp;
     private ImageView ivThumbsDown;
     private Loan currentLoan;
@@ -42,7 +48,7 @@ public class SwipeLoanFragment extends Fragment {
         currentLoan = getArguments().getParcelable("loan");
         ivLoan = (ImageView) v.findViewById(R.id.ivLoan);
         tvName = (TextView) v.findViewById(R.id.tvName);
-        tvUse = (TextView) v.findViewById(R.id.tvUse);
+        tvDescription = (TextView) v.findViewById(R.id.tvDescription);
         ivThumbsUp = (ImageView) v.findViewById(R.id.ivThumbsUp);
         ivThumbsDown = (ImageView) v.findViewById(R.id.ivThumbsDown);
         setLoanView(v);
@@ -65,7 +71,28 @@ public class SwipeLoanFragment extends Fragment {
     private void setLoanView(View v) {
         Picasso.with(v.getContext()).load(currentLoan.getImageUrl()).into(ivLoan);
         tvName.setText(currentLoan.getName());
-        tvUse.setText(currentLoan.getUse());
+        KivaClient kc = new KivaClient();
+        kc.getLoanDescription(currentLoan.getKivaId(), new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    JSONObject texts = response.getJSONArray("loans").getJSONObject(0).getJSONObject("description").getJSONObject("texts");
+                    if (texts.has("en")){
+                        final String desc = texts.getString("en");
+                        tvDescription.setText(desc);
+                        tvDescription.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                FragmentManager fm = getActivity().getSupportFragmentManager();
+                                ShowDescriptionDialog d = ShowDescriptionDialog.newInstance(desc);
+                                d.show(fm, "fragment_show_description");
+                            }
+                        });
+                    } else {
+                        tvDescription.setText(currentLoan.getUse());
+                        }
+                } catch (JSONException e) {}}
+        });
         setThumbsColors();
     }
 

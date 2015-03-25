@@ -36,7 +36,7 @@ public class LoansArrayAdapter extends ArrayAdapter<Loan> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_loan, parent, false);
             viewHolder.ivLoan = (ImageView) convertView.findViewById(R.id.ivLoan);
             viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-            viewHolder.tvUse = (TextView) convertView.findViewById(R.id.tvUse);
+            viewHolder.tvUse = (TextView) convertView.findViewById(R.id.tvDescription);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

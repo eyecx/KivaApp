@@ -24,4 +24,9 @@ public class KivaClient extends AsyncHttpClient {
         String finalUrl = builder.build().toString();
         get(finalUrl, null, h);
     }
+
+    public void getLoanDescription(int id, JsonHttpResponseHandler h) {
+        String queryUrl = "http://api.kivaws.org/v1/loans/" + Integer.toString(id) + ".json";
+        get(queryUrl, null, h);
+    }
 }

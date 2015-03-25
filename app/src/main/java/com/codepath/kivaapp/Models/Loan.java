@@ -36,7 +36,7 @@ public class Loan extends ParseObject implements Parcelable {
             j.setPostedDate(json.getString("posted_date"));
             j.setLike(0);
             if (json.has("image")) {
-                j.imageUrl = "http://www.kiva.org/img/fullsize/" + json.getJSONObject("image").getInt("id") + ".jpg";
+                j.imageUrl = "http://www.kiva.org/img/s100/" + json.getJSONObject("image").getInt("id") + ".jpg";
             }
         } catch (JSONException e) {
             e.printStackTrace();

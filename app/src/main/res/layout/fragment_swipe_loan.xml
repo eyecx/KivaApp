@@ -4,7 +4,7 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:id="@+id/ivLoan"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -12,7 +12,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:paddingBottom="10dp"
-        android:src="@drawable/ic_profile"/>
+        android:src="@drawable/ic_profile"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,25 +26,28 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="center_horizontal"
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="10dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Use"
-        android:id="@+id/tvUse"
+        android:text="Description"
+        android:maxHeight="100dp"
+        android:id="@+id/tvDescription"
         android:layout_below="@+id/tvName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="center_horizontal"
-        android:paddingBottom="20dp"/>
+        android:paddingBottom="20dp"
+        android:layout_margin="10dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvUse"
+        android:layout_below="@+id/tvDescription"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal">
         <ImageView
@@ -51,7 +55,8 @@
             android:layout_height="50dp"
             android:src="@drawable/thumbs_up"
             android:id="@+id/ivThumbsUp"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp" />
 
         <ImageView
             android:layout_width="50dp"
@@ -60,6 +65,7 @@
             android:src="@drawable/thumbs_down"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ivThumbsUp"
-            android:layout_toEndOf="@+id/ivThumbsUp"/>
+            android:layout_toEndOf="@+id/ivThumbsUp"
+            android:layout_marginLeft="10dp" />
     </RelativeLayout>
 </RelativeLayout>
